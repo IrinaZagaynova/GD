@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,9 +19,13 @@ public class RotationGap124 : MonoBehaviour
 	private Vector3 resetPosition;
 	private bool isObjectMoved = false; 
 	private Position position = Position.Forward;
+	private Stopwatch _stopWatch = new Stopwatch();
 	
 	void OnMouseDown()
     {
+		_stopWatch.Reset();
+		_stopWatch.Start();
+		
 		if (!isObjectMoved)
 		{
 			resetPosition = GameObject.Find("Gap4").transform.position;
@@ -29,6 +35,15 @@ public class RotationGap124 : MonoBehaviour
 	
 	void OnMouseUp()
     {
+		_stopWatch.Stop();
+		TimeSpan ts = _stopWatch.Elapsed;
+		TimeSpan delay = new TimeSpan(1700000);
+		
+		if (ts > delay)
+		{
+			return;
+		}
+		
 		if (AreObjectsClose(resetPosition, gameObject.transform.position))
 		{
 			if (position == Position.Forward)

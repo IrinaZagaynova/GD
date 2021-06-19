@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,45 +16,58 @@ public class RotationGap123 : MonoBehaviour
 		Left
 	}
 
-	private Vector3 resetPosition;
-	private bool isObjectMoved = false; 
-	private Position position = Position.Forward;
+	private Vector3 _resetPosition;
+	private bool _isObjectMoved = false; 
+	private Position _position = Position.Forward;
+	private Stopwatch _stopWatch = new Stopwatch();
 	
 	void OnMouseDown()
     {
-		if (!isObjectMoved)
+		_stopWatch.Reset();
+		_stopWatch.Start();
+		
+		if (!_isObjectMoved)
 		{
-			resetPosition = GameObject.Find("Gap3").transform.position;
-			isObjectMoved = true; 
+			_resetPosition = GameObject.Find("Gap3").transform.position;
+			_isObjectMoved = true; 
 		}
     }
 	
 	void OnMouseUp()
     {
-		if (AreObjectsClose(resetPosition, gameObject.transform.position))
+		_stopWatch.Stop();
+		TimeSpan ts = _stopWatch.Elapsed;
+		TimeSpan delay = new TimeSpan(1700000);
+		
+		if (ts > delay)
 		{
-			if (position == Position.Forward)
+			return;
+		}
+		
+		if (AreObjectsClose(_resetPosition, gameObject.transform.position))
+		{
+			if (_position == Position.Forward)
 			{
 				transform.position = new Vector3(-5.5f, -2.3f, -0.6f);
-				position = Position.Right;
+				_position = Position.Right;
 			}
-			else if (position == Position.Right)
+			else if (_position == Position.Right)
 			{
 				transform.position = new Vector3(-8, -2.25f, -0.4f);
-				position = Position.Back;
+				_position = Position.Back;
 			}
-			else if (position == Position.Back)
+			else if (_position == Position.Back)
 			{
 				transform.position = new Vector3(-7.9f, -2.3f, -2.9f);
-				position = Position.Left;
+				_position = Position.Left;
 			}
-			else if (position == Position.Left)
+			else if (_position == Position.Left)
 			{
 				transform.position = new Vector3(-5.1f, -2.2f, -3);
-				position = Position.Forward;
+				_position = Position.Forward;
 			}
 			transform.Rotate(0.0f, -90.0f, 0.0f);
-			resetPosition = GameObject.Find("Gap3").transform.position;
+			_resetPosition = GameObject.Find("Gap3").transform.position;
 		}
 	}
 	
