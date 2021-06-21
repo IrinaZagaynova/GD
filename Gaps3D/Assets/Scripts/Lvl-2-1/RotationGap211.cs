@@ -33,24 +33,25 @@ public class RotationGap211 : MonoBehaviour
 		{
 			if (position == Position.Forward)
 			{
-				transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -0.6f);
+				transform.position = new Vector3(-5, gameObject.transform.position.y, -2.8f);
 				position = Position.Right;
 			}
 			else if (position == Position.Right)
 			{
-				transform.position = new Vector3(-6, -2.15f, -0.57f);
+				transform.position = new Vector3(-2.6f, gameObject.transform.position.y, -2.4f);
 				position = Position.Back;
 			}
 			else if (position == Position.Back)
 			{
-				transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -2.8f);
+				transform.position = new Vector3(-2.8f, gameObject.transform.position.y, -0.55f);
 				position = Position.Left;
 			}
 			else if (position == Position.Left)
 			{
-				transform.position = new Vector3(-4, -2.2f, -2.8f);
+				transform.position = new Vector3(-5.3f, -2, -0.3f);
 				position = Position.Forward;
 			}
+			
 			transform.Rotate(0.0f, -90.0f, 0.0f);
 			resetPosition = GameObject.Find("Gap1").transform.position;
 		}

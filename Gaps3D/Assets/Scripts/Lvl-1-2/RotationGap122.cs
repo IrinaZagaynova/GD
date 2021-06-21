@@ -58,7 +58,7 @@ public class RotationGap122 : MonoBehaviour
 			}
 			else if (_position == Position.Back)
 			{
-				transform.position = new Vector3(-1.5f, -2.3f, -0.5f);
+				transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -0.4f);
 				_position = Position.Left;
 			}
 			else if (_position == Position.Left)
