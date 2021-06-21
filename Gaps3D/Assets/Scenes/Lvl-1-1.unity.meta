@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Gaps3D/Assets/Scenes/Lvl-1-1.unity.meta
 guid: 6cc83314ddec7ba469e0ecaf6a4fd63c
 DefaultImporter:
+========
+guid: 7fb5c8e669cd6824ab6a4937982707f3
+NativeFormatImporter:
+>>>>>>>> main-menu:Gaps3D/Assets/Yellow.mat.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
