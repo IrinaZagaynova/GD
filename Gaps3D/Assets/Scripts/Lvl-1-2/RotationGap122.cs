@@ -20,6 +20,7 @@ public class RotationGap122 : MonoBehaviour
 	private bool _isObjectMoved = false; 
 	private Position _position = Position.Forward;
 	private Stopwatch _stopWatch = new Stopwatch();
+	public GameObject _object;
 	
 	void OnMouseDown()
     {
@@ -44,26 +45,30 @@ public class RotationGap122 : MonoBehaviour
 			return;
 		}
 		
+		GameObject.Find("Touch").transform.position = new Vector3(-2.25f, -1.25f, -10);
+		GameObject.Find("TouchArea").transform.position = new Vector3(-2.8f, -1, -10);
+		
 		if (AreObjectsClose(_resetPosition, gameObject.transform.position))
 		{
 			if (_position == Position.Forward)
 			{
-				transform.position = new Vector3(-3.6f, gameObject.transform.position.y, -2.55f);
+				transform.position = new Vector3(-4f, gameObject.transform.position.y, gameObject.transform.position.z);
 				_position = Position.Right;
+				_object.GetComponent<Animation>().Play("Drag1");
 			}
 			else if (_position == Position.Right)
 			{
-				transform.position = new Vector3(-1.6f, gameObject.transform.position.y, -2.76f);
+				transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -2.6f);
 				_position = Position.Back;
 			}
 			else if (_position == Position.Back)
 			{
-				transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -0.4f);
+				transform.position = new Vector3(-1.6f, gameObject.transform.position.y, -2.9f);
 				_position = Position.Left;
 			}
 			else if (_position == Position.Left)
 			{
-				transform.position = new Vector3(-3.6f, -2.25f, -0.3f);
+				transform.position = new Vector3(-1.7f, -2.25f, -0.5f);
 				_position = Position.Forward;
 			}
 			transform.Rotate(0.0f, -90.0f, 0.0f);
